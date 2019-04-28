@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Time</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Container for content -->
+    <div class="container">
+
+        <!-- Bootstrap jumbotron -->
+        <div class="jumbotron jumbotron-fluid">
+            <!-- Container for text -->
+            <div class="container">
+                <!-- Main header -->
+                <h1 class="display-4">Anytime Is Train Time</h1>
+                <!-- Subheader -->
+                <p class="lead">Choo Choo. Chee Chee.
+                </p>
+            </div>
+        </div>
+
+        <!-- Bootstrap card to contain the output table -->
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+                Current Train Time
+            </div>
+            <div class="card-body">
+                <!-- Create table -->
+                <table class="table" id="main-table">
+                    <!-- Table head -->
+                    <thead>
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <!-- Table body -->
+                    <!-- Where the inputss will be outputted to -->
+                    <tbody id="table-rows">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bootstrap card to contain the form -->
+        <div class="card" id="card2">
+            <!-- Card header -->
+            <div class="card-header">
+                Add Train
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <!-- Input title -->
+                        <label for="train">Train Name</label>
+                        <!-- Form input -->
+                        <input type="name" class="form-control" id="nameInput" aria-describedby="nameHelp"
+                            placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <!-- Input title -->
+                        <label for="destination">Destination</label>
+                        <!-- Form input -->
+                        <input type="destination" class="form-control" id="destinationInput" placeholder="Destination">
+                    </div>
+                    <div class="form-group">
+                        <!-- Input title -->
+                        <label for="timeInput">First Train Time (HH:mm - military time)</label>
+                        <!-- Form input -->
+                        <input type="text" class="form-control" id="timeInput" placeholder="HH:mm">
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Input title -->
+                        <label for="frequencyInput">Frequency (min)</label>
+                        <!-- Form input -->
+                        <input type="number" class="form-control" id="frequencyInput" placeholder="0">
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" id="add-user" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase link -->
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+
+    <!-- Jquery link -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- Javascript link for the moment library -->
+    <script src="assets/js/moment.js"></script>
+
+    <script src="assets/js/schedule.js"></script>
+
+</body>
+
+</html>

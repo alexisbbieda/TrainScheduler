@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>To Do App!</title>
+
+  <!-- In page css styling -->
+  <style>
+    #todo-item {
+      font-weight: 700;
+      font-size: 2em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Title -->
+  <h1>My To Do's!</h1>
+
+  <!-- User input Form -->
+  <form>
+    <span id="todo-item">To Do Item: <input id="to-do" type="text" ><input id="add-to-do" value="Add Item" type="submit"></span>
+  </form>
+
+  <hr>
+
+  <!-- Div for to-do list -->
+  <div id="to-dos"></div>
+
+  <!-- Link to jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Link to Script -->
+  <script>
+    //  ============================= START CODING BELOW! =============================================
+
+    //Create a varible and set it to an empty number
+    var toDoCount = 0;
+
+    //Create an click event listener
+    $("#add-to-do").on("click", function(event) {
+      
+      //Prevent form from submitting
+      event.preventDefault();
+
+      //Createe a variable that stores the input information value
+      var inputValue = $("#to-do").val();
+
+      //Create a new p tag
+      var p = $("<p>");
+      
+      //Create an id attribute for the paragraph tag that has a number equal to the number of to dos
+      p.attr("id", "item-" + toDoCount);
+      console.log(p);
+
+      //Add the text to the element
+      p.text(inputValue);
+
+      //Create a new button and store it in a variable 
+      var checkButton = $("<button>");
+
+      //Create an id attribute for the paragraph tag that has a number equal to the number of to dos
+      checkButton.attr("id", "p-item-" + toDoCount);
+
+      //Create a data attribute
+      checkButton.attr("data-to-do", toDoCount);
+
+      //Create a class with a checkbox attribute
+      checkButton.attr("class", "checkbox");
+
+      //Create an X for the chekcbox
+      checkButton.text("X");
+
+      //Prepend the button
+      p.prepend(checkButton);
+
+      //Prepend the to do item
+      $("#to-dos").prepend(p);
+
+      //Clear
+      $("#to-do").val("");
+
+      //Increment the to do count
+      toDoCount++;
+
+    });
+
+    //Create a click event listener that has a class. The document.body is added because it is a dynamic event listener
+    $(document.body).on("click", ".checkbox", function() {
+
+      //Get the button number from the data attribute and hold it in a variable
+      var toDoNumber = $(this).attr("data-to-do");
+
+      //Empty the p element
+      $("#item-" + toDoNumber).empty();
+
+    });
+  </script>
+
+</body>
+
+</html>

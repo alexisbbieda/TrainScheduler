@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Click Button with Firebase!</title>
+
+  <!-- -->
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Create a header with an id of click value. Number of clicks-->
+  <h1>Ouch! You've clicked me
+    <span id="click-value"></span> times!</h1>
+
+  <!-- Creating a button that will be clicked that will send the data-->
+  <button id="click-button">Click Me!!!!</button>
+
+  <!--Jquery and firbase link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ 
+  <!-- ================================================================================== -->
+  <script>
+
+//Configuring the firebase database objects
+var config = {
+    apiKey: "AIzaSyAo6O7d9iaqwzxn1ylh7NhutLO0vkXB7jQ",
+    authDomain: "test-11f70.firebaseapp.com",
+    databaseURL: "https://test-11f70.firebaseio.com",
+    projectId: "test-11f70",
+    storageBucket: "test-11f70.appspot.com",
+    messagingSenderId: "577345672060"
+  };
+
+  //Calling firebase to start the configuration stated above
+  firebase.initializeApp(config);
+
+    // VARIABLES
+    // --------------------------------------------------------------------------------
+    //create a variable that holds the database information and calls the above configuration
+    //variable for database location
+    var database = firebase.database();
+    //create a variable for that holds the number for the amoung of times the button is being clicked
+    //click counter is initialized to zero
+    var clickCounter = 0;
+
+    // FUNCTIONS + EVENTS
+    // --------------------------------------------------------------------------------
+    //create a click function
+    //event listener for the click button on click
+    //Each time event executes, counter is incremented by 1
+    //Set the counter value to the count property and send to the firebase (database)
+    $("#click-button").on("click", function() {
+      //when the button is clicked increase the click counter
+      clickCounter++;
+
+      //the database url at its route location is being referenced
+      //setting an object to the route location
+      database.ref().set({
+        //the object of click count is equal to the key value pair of the counter
+        clickCount: clickCounter
+      });
+    });
+
+    // MAIN PROCESS + INITIAL CODE
+    // --------------------------------------------------------------------------------
+    //THIS IS MORE OF A READ FUNCTION
+    //everything something changes in the database when it is set, this reads it
+    //This whole event listener is predefined using firebases library
+
+    //calling the database url and create a function on a certain value
+    //Database.ref() refers to the location of our database
+    //Event listener for value event. (anything that changes at that location, it will execute that call)
+    //Changes for on the database every time someone clicks
+    //snapshot is all of our data at that location (snapshot of that data at that location)
+    //.val() converts it into a javascript object that we can read to
+    database.ref().on("value", function(snapshot) {
+      //console log the value of the snapshot element
+      console.log(snapshot.val());
+
+      //set the click counter equal to the value of the snapshot and the click count value
+      clickCounter = snapshot.val().clickCount;
+
+      //append the text up of the cick counter
+      //or  $("#click-value").text(clickCounter);
+      $("#click-value").text(snapshot.val().clickCount);
+
+      //create a function for an error
+      //errorObject is implicently returned
+    }, function(errorObject) {
+      //console log when the error object occurs
+      console.log("The read failed: " + errorObject.code);
+    });
+
+  </script>
+
+</body>
+
+</html>

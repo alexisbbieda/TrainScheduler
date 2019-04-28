@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Sign-Up Today!</title>
+
+  <!-- Link to bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <!-- Bootstrap containger that holds all the content -->
+  <div class="container">
+
+    <br>
+
+    <!-- Bootstrap Jumbotron -->
+    <div class="jumbotron">
+      <h1 class="text-center">Sign-Up Today!</h1>
+    </div>
+    <div class="row">
+
+       <!-- Bootstrap Card-->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            New Member Sign-Up
+          </div>
+          <div class="card-body">
+
+            <!-- Bootstrap Form -->
+            <form role="form">
+              <div class="form-group">
+
+                <!-- Name input -->
+                <label for="name-input">Name:</label>
+                <input class="form-control" id="name-input" type="text">
+              </div>
+
+              <!-- Email input -->
+              <div class="form-group">
+                <label for="email-input">Email:</label>
+                <input class="form-control" id="email-input" type="email">
+              </div>
+
+              <!-- Age input -->
+              <div class="form-group">
+                <label for="age-input">Age:</label>
+                <input class="form-control" id="age-input" type="number">
+              </div>
+
+              <!-- Comment input -->
+              <div class="form-group">
+                <label for="comment-input">How did you hear about us?</label>
+                <textarea class="form-control" id="comment-input" rows="5"></textarea>
+              </div>
+
+              <!-- Submit button -->
+              <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card display-->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            Most Recent Member
+          </div>
+          <div class="card-body" id="recent-member">
+            <h2 id="name-display">Jimmy John</h2>
+            <h4 id="email-display">Email: jimmy@john.edu</h4>
+            <h4 id="age-display">Age: 27</h4>
+            <p id="comment-display">I'm signing up, because I want to spread sandwiches to the world.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Link to jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Link to firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+
+  
+  <script>
+
+    //Configuration from firebase
+    var config = {
+    apiKey: "AIzaSyD9Al4k-mzMNYsPHrUnfwMMicnGLoEiago",
+    authDomain: "alexis-practice-project.firebaseapp.com",
+    databaseURL: "https://alexis-practice-project.firebaseio.com",
+    projectId: "alexis-practice-project",
+    storageBucket: "alexis-practice-project.appspot.com",
+    messagingSenderId: "741055052741"
+  };
+
+  //Initialize the configuration (firebase)
+  firebase.initializeApp(config);
+
+    //Variable that references the database
+    var database = firebase.database();
+
+    //Create empty variables
+    var name = "";
+    var email = "";
+    var age = "";
+    var comment = "";
+
+    //Create click event for the submit button
+    $("#add-user").on("click", function(event) {
+
+      //Prevent the page from refreshing
+      event.preventDefault();
+
+      //Get the user input information and store it in a variable
+      name = $("#name-input").val().trim();
+      email = $("#email-input").val().trim();
+      age = $("#age-input").val().trim();
+      comment = $("#comment-input").val().trim();
+
+     
+      // Pass the information to the route location (firebase)
+      database.ref().set({
+        name: name,
+        email: email,
+        age: age,
+        comment: comment
+      });
+    });
+
+
+    //Get snapshot of the current data
+    //Value event listener function that keeps the page updated when values change in firebase
+    database.ref().on("value", function(snapshot){
+      
+      //Add the properties to the DOM
+      $("#name-display").text(snapshot.val().name);
+      $("#email-display").text(snapshot.val().email);
+      $("#age-display").text(snapshot.val().age);
+      $("#comment-display").text(snapshot.val().comment);
+
+    //Firebase error function
+  }, function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  </script>
+
+</body>
+
+</html>

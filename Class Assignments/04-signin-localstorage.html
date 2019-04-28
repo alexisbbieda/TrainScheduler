@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Sign-Up Today!</title>
+
+  <!-- Link to bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+  <!-- Bootstrap containger that holds all the content -->
+  <div class="container">
+
+    <br>
+
+    <!-- Bootstrap Jumbotron -->
+    <div class="jumbotron">
+      <h1 class="text-center">Sign-Up Today!</h1>
+    </div>
+
+    <div class="row">
+
+      <!-- Bootstrap Card-->
+      <div class="col-lg-6">
+        <div class="card card-default">
+          <div class="card-header">
+            New Member Sign-Up
+          </div>
+          <div class="card-body">
+
+            <!-- Bootstrap Form -->
+            <form role="form">
+
+              <!-- Name input -->
+              <div class="form-group row">
+                <label for="name-input">Name:</label>
+                <input class="form-control" id="name-input" type="text">
+              </div>
+
+              <!-- Email input -->
+              <div class="form-group row">
+                <label for="email-input">Email:</label>
+                <input class="form-control" id="email-input" type="email">
+              </div>
+
+              <!-- Age input -->
+              <div class="form-group row">
+                <label for="age-input">Age:</label>
+                <input class="form-control" id="age-input" type="number">
+              </div>
+
+              <!-- Comment input -->
+              <div class="form-group row">
+                <label for="comment-input">How did you hear about us?</label>
+                <textarea class="form-control" id="comment-input" rows="5"></textarea>
+              </div>
+
+              <!-- Submit button -->
+              <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card display-->
+      <div class="col-lg-6">
+        <div class="card card-default">
+          <div class="card-header">
+            Most Recent Member
+          </div>
+          <div class="card-body" id="recent-member">
+            <h2 id="name-display">Jimmy John</h2>
+            <h4 id="email-display">Email: jimmy@john.edu</h4>
+            <h4 id="age-display">Age: 27</h4>
+            <p id="comment-display">I'm signing up, because I want to spread sandwiches to the world.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Link to jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <script>
+
+    //Create clikc event listener for when the submit button is clicked
+    $("#add-user").on("click", function(event) {
+
+      //Prevent form from submitting
+      event.preventDefault();
+
+      //Get the user name input and store it in a variable
+      var name = $("#name-input").val();
+
+      //Get the user email input and store it in a variable
+      var email = $("#email-input").val();
+
+      //Get the user age input and store it in a variable
+      var age = $("#age-input").val();
+
+      //Get the user comment input and store it in a variable
+      var comment = $("#comment-input").val();
+      
+      //Print the name input to the console
+      console.log(name);
+
+      //Print the email input to the console
+      console.log(email);
+
+      //Print the age input to the console
+      console.log(age);
+
+      //Print the comment input to the console
+      console.log(comment);
+
+
+      //Send the name input information to the DOM
+      $("#name-display").text(name);
+
+      //Send the email input information to the DOM
+      $("#email-display").text(email);
+
+      //Send the age input information to the DOM
+      $("#age-display").text(age);
+
+      //Send the comment input information to the DOM
+      $("#comment-display").text(comment);     
+
+      //Clear local storage
+      localStorage.clear();
+
+      //Save key value pairs in the web browser
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("age", age);
+      localStorage.setItem("comment", comment);
+
+      //Send the saved information to the DOM
+      $("#name-display").text(localStorage.getItem("name"));
+      $("#email-display").text(localStorage.getItem("email"));
+      $("#age-display").text(localStorage.getItem("age"));
+      $("#comment-display").text(localStorage.getItem("comment"));
+    });
+
+    //Clear the save information
+    localStorage.clear();
+
+    //Display the content from local storage
+    $("#name-display").text(localStorage.getItem("name"));
+      $("#email-display").text(localStorage.getItem("email"));
+      $("#age-display").text(localStorage.getItem("age"));
+      $("#comment-display").text(localStorage.getItem("comment"));
+  </script>
+
+</body>
+
+</html>

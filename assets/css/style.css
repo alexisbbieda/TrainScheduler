@@ -1,0 +1,23 @@
+/* Styling for the jumbotron */
+.jumbotron {
+    background: #774831;
+    color: white;
+    text-align: center;
+}
+
+/* Styling for the form card */
+#card2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styling for the card headers */
+.card-header {
+    background-color: #457ab1;
+    color: white;
+}
+
+/* Styling for the submit button */
+#add-user {
+    background-color: #457ab1;
+}
